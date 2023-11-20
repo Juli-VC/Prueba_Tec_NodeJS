@@ -1,0 +1,11 @@
+<%- include ('navbar') %>
+<div class="container contactResponse py-5">
+  <h3>Estado de su contacto</h3>
+  <hr />
+  <% if (success) { %>
+  <p><%= message %> ✅</p>
+  <% } else { %>
+  <p><%= message %></p>
+  <% } %>
+</div>
+<%- include ('footer') %>
