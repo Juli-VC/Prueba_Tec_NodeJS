@@ -25,9 +25,8 @@ class IndexController {
   // Muestra  homepage
   viewHome = (req, res) => {
     let userLoggedIn = null;
-    
+
     // Verifica si hay un token en la cookie y decódificalo si existe
-    console.log("Cookies:", req.cookies);
     const token = req.cookies.jwt;
 
     if (token) {
@@ -39,18 +38,16 @@ class IndexController {
       }
     }
 
-    res.render("index", { title: "SensiveWeb", userLoggedIn, message:"" });
+    res.render("index", { title: "SensiveWeb", userLoggedIn, message: "" });
   };
   // Muestra  ToS --terminos y condiciones
   viewTos = (req, res) => {
     res.render("tos", {
       title: "Sensive- Terminos y condiciones",
-      message:""
+      message: "",
     });
   };
   /////////////////
-  /////////////////
-
   // Función para registrar un usuario
   registerUser = (req, res) => {
     let { name, lastname, email, password } = req.body;
@@ -81,7 +78,6 @@ class IndexController {
         } else {
           // Cambiar la redirección y el mensaje según tus necesidades
           res.redirect("/");
-          console.log("registerOK", sql);
         }
       });
     });
@@ -96,7 +92,6 @@ class IndexController {
 
     // Validar que el correo electrónico esté presente
     if (!email) {
-      console.log("validaEmail", req.body);
       res.render("index", { message: "Email incorrecto1" });
       return;
     }
@@ -108,12 +103,9 @@ class IndexController {
       if (error) throw error;
 
       if (result.length == 1) {
-        let user = result[0]; // Obtener la información del usuario desde el resultado de la consulta
-        console.log("result", result);
+        let user = result[0];
         let hash = user.password;
         bcrypt.compare(password, hash, (err, resultCompare) => {
-          console.log("emailOK", email);
-          console.log("resultCompare", resultCompare);
           if (resultCompare) {
             const token = this.generateToken({
               email: user.email,
@@ -122,7 +114,6 @@ class IndexController {
             });
             res.cookie("jwt", token, { httpOnly: true });
             res.redirect("/");
-            console.log("LOGIN COMPLETADO");
           } else {
             res.render("index", { message: "Contraseña incorrecta" });
           }

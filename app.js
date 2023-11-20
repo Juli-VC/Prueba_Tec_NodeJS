@@ -7,9 +7,6 @@ const jwt = require('jsonwebtoken');
 
 var indexRouter = require("./routes/index");
 var indexRouter = require("./routes/index");
-
-
-
 var app = express();
 
 // view engine setup
@@ -36,17 +33,13 @@ app.use((req, res, next) => {
       // Verifica el token y extrae la información del usuario
       const decoded = jwt.verify(token, 'secret');
       userLoggedIn = decoded.user;
-      console.log("userLoggedIn", userLoggedIn);
-      console.log("decoded", decoded);
     } catch (error) {
       console.error('Error al decodificar el token:', error);
     }
   }
-
   // Establecer variables para todas las vistas
   res.locals.userLoggedIn = userLoggedIn;
   res.locals.userLoggedIn = message;
-
   // Llama a next() para pasar al siguiente middleware o ruta
   next();
 });
@@ -69,7 +62,6 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
   // render the error page
   res.status(err.status || 500);
   res.render("error");

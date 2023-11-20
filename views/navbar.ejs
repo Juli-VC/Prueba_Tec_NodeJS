@@ -69,15 +69,17 @@
             <!-- Button trigger modal -->
             <% if (userLoggedIn) { %>
             <!-- Mostrar botones para usuario autenticado -->
-            <li class="nav-item">
+            <li class="nav-item d-flex mx-4">
               <!-- Aquí puedes agregar la lógica para mostrar la imagen del avatar y el nombre de usuario -->
-              <a class="nav-link" href="/perfil">
-                <img src="" alt="Avatar" class="avatar-img" />
+              <a class="nav-link " href="/perfil">
+                <img src="/images/avatar.jpg" alt="Avatar" class="avatar-img"
+                height="50px" /> 
                 <%= userLoggedIn.username %> <%= userLoggedIn.lastname %>
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/logout">Cerrar sesión</a>
+            <li class="nav-item d-flex">
+              
+               <a class="btn btn-outline-danger btn-sm text-decoration-none" href="/logout">Cerrar sesión</a> 
             </li>
             <% } else { %>
             <!-- Mostrar botones de inicio de sesión y registro -->
